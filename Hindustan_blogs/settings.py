@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'froala_editor',
+    'blogapplication.apps.BlogapplicationConfig',
 
     #django website api section
     #django cleanup will delete any static files images when the model is deleted
