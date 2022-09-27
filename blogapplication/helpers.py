@@ -12,8 +12,25 @@ def generate_random_string(N):
 
 def generate_slug(text):
     new_slug = slugify(text)
-    from home.models import BlogModel
+
+    '''
+    We are going to import BlogModel here so that we can prevent circular import error
+    '''
+    from blogapplication.models import BlogModel
 
     if BlogModel.objects.filter(slug=new_slug).first():
         return generate_slug(text + generate_random_string(5))
     return new_slug
+
+
+from django.conf import settings
+from django.core.mail import send_mail
+
+
+def send_mail_to_user(token, email):
+    subject = f"Your account needs to be verified"
+    message = f"Hi paste the link to verify account http://127.0.0.1:8000/verify/{token}"
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = [email]
+    send_mail(subject, message, email_from, recipient_list)
+    return True

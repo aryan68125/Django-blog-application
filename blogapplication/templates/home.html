@@ -22,7 +22,7 @@
         <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
           <div class="card shadow border-0 h-100">
             <a href="{% url 'blog_detail' blog.slug %}">
-              <img class="img-fluid card-img-top" src="/media/{{blog.image}}" alt="..."/></a>
+              <img class="img-fluid card-img-top" src="/static/{{blod.image}}" alt="..."/></a>
             <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#">
               {{blog.user.username}} </a>
               <h5 class="my-2"><a class="text-dark" href="{% url 'blog_detail' blog.slug %}">
@@ -33,13 +33,13 @@
                 {{blog.content|safe}}
               </p>
             -->
-              <a class="btn btn-link pl-0"href="{% url 'blog_detail' blog.slug %}">Read more<i class="fa fa-long-arrow-alt-right ml-2"></i></a> 
+              <a class="btn btn-link pl-0"href="{% url 'blog_detail' blog.slug %}">Read more<i class="fa fa-long-arrow-alt-right ml-2"></i></a>
             </div>
           </div>
         </div>
         {% endfor %}
-      
-      
+
+
       </div>
       <!-- Pagination -->
       <nav aria-label="Blog pagination">

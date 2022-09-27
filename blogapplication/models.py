@@ -16,6 +16,7 @@ class Profile(models.Model):
     is_verified = models.BooleanField(default=False)
     token = models.CharField(max_length=100)
 
+
 class BlogModel(models.Model):
     title = models.CharField(max_length=1000)
     content = FroalaField()
