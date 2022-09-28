@@ -31,9 +31,9 @@ class LoginView(APIView):
                 response['message'] = 'invalid username , user not found'
                 raise Exception('invalid username not found')
 
-            if not Profile.objects.filter(user=check_user).first().is_verified:
-                response['message'] = 'your profile is not verified'
-                raise Exception('profile not verified')
+            # if not Profile.objects.filter(user=check_user).first().is_verified:
+            #     response['message'] = 'your profile is not verified'
+            #     raise Exception('profile not verified')
 
             user_obj = authenticate(username=data.get('username'),
                                     password=data.get('password'))

@@ -12,7 +12,9 @@ def logout_view(request):
 
 
 def home(request):
-    context = {'blogs': BlogModel.objects.all()}
+    context = {
+    'blogs': BlogModel.objects.all(),
+    }
     return render(request, 'home.html', context)
 
 
