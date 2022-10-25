@@ -25,6 +25,8 @@ urlpatterns = [
     path('', include('blogapplication.urls')),
     path('froala_editor/',include('froala_editor.urls')),
     path('api/', include('blogapplication.urls_api')),
+    #authentication app url routes
+    path('authentication/', include('authentication.urls')),
 ]
 #added a media url route to this file so that django knows how to fetch user uploaded images for the front end
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

@@ -46,12 +46,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'froala_editor',
     'blogapplication.apps.BlogapplicationConfig',
+    'authentication.apps.AuthenticationConfig',
 
     #django website api section
     #django cleanup will delete any static files images when the model is deleted
     'django_cleanup.apps.CleanupConfig',
     #add 'rest_framework', for our django rest api
     'rest_framework',
+    #add boto3 and django-storages here so that we can use amazon s3 bucket
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -156,7 +159,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 #by default the images uploaded by the user will be stored in the root directory of the project
 #but we want django to store our images uploaded by the users into this path (static/images/)
 #MEDIA_ROOT simply tells django where to store user uploaded content
-MEDIA_ROOT = os.path.join(BASE_DIR,'static/images')
+MEDIA_ROOT = os.path.join(BASE_DIR,'static/images') #-> current path of all the images that are being sent inyto this directory
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -171,3 +174,22 @@ django_heroku.settings(locals())
 # EMAIL_PORT = 587
 # EMAIL_HOST_USER = 'email'
 # EMAIL_HOST_PASSWORD = 'password'
+
+# #------AMAZON S3 BUCKET RELATED SETTINGS--------------------
+# #this will handle our amazon s3 bucket that will host our static files and user uploaded files on our website
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# #setup your access key of your AWS (Amazon web services)
+# AWS_ACCESS_KEY_ID = 'AKIAXJD4CDE464QQSZ6L'
+# AWS_SECRET_ACCESS_KEY = 'eWvePxmLSkLj84oUqx/os7Zx6hKvep0wRdJjIzaM'
+#
+# #now assign your s3 bucket to this django project
+# AWS_STORAGE_BUCKET_NAME = "blog-application-aryan68125"
+#
+# #add this so that you can access your uploaded images from amazon s3 bucket
+# AWS_S3_REGION_NAME = "ap-south-1"
+#
+# AWS_S3_SIGNATURE_VERSION = "s3v4"
+#
+# #this will make sure that the images having same name when uploaded to the s3 bucket have a unique name and do not overwrite each other
+# #so basically if there are two users uploading an image having same names then it will not cause any conflict and prevent one user from overwriting othe user's uploaded image in the S3 bucket
+# AWS_S3_FILE_OVERWRITE = False

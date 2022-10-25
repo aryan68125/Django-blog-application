@@ -1,26 +1,32 @@
 from django.shortcuts import render, redirect
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 from .form import *
 from django.contrib.auth import logout
 
+# def register_view(request):
+#     return render(request, 'register.html')
+#
+# #function for login page
+# def login_view(request):
+#     return render(request, 'login.html')
+#
+# def logout_view(request):
+#     logout(request)
+#     return redirect('/')
+#
 
-def logout_view(request):
-    logout(request)
-    return redirect('/')
+#This function will show an error page if the user is not logged in to view the page
+def login_required_function(request):
+    return render(request, 'login_required.html')
 
-
+#...........................................................................................................................................
 def home(request):
     context = {
     'blogs': BlogModel.objects.all(),
     }
     return render(request, 'home.html', context)
-
-
-def login_view(request):
-    return render(request, 'login.html')
-
 
 def blog_detail(request, slug):
     context = {}
@@ -30,7 +36,6 @@ def blog_detail(request, slug):
     except Exception as e:
         print(e)
     return render(request, 'blog_detail.html', context)
-
 
 def see_blog(request):
     context = {}
@@ -44,7 +49,8 @@ def see_blog(request):
     print(context)
     return render(request, 'see_blog.html', context)
 
-
+#login_required decorator will not allow any user that is not logged in this website
+@login_required(login_url='login_required_exp')
 def add_blog(request):
     context = {'form': BlogForm}
     try:
@@ -70,7 +76,7 @@ def add_blog(request):
 
     return render(request, 'add_blog.html', context)
 
-
+@login_required
 def blog_update(request, slug):
     context = {}
     try:
@@ -101,10 +107,9 @@ def blog_update(request, slug):
         context['form'] = form
     except Exception as e:
         print(e)
-
     return render(request, 'update_blog.html', context)
 
-
+@login_required
 def blog_delete(request, id):
     try:
         blog_obj = BlogModel.objects.get(id=id)
@@ -114,24 +119,20 @@ def blog_delete(request, id):
 
     except Exception as e:
         print(e)
-
     return redirect('/see-blog/')
+#.......................................................................................................................................
 
 
-def register_view(request):
-    return render(request, 'register.html')
-
-
-def verify(request, token):
-    try:
-        profile_obj = Profile.objects.filter(token=token).first()
-
-        if profile_obj:
-            profile_obj.is_verified = True
-            profile_obj.save()
-        return redirect('/login/')
-
-    except Exception as e:
-        print(e)
-
-    return redirect('/')
+# def verify(request, token):
+#     try:
+#         profile_obj = Profile.objects.filter(token=token).first()
+#
+#         if profile_obj:
+#             profile_obj.is_verified = True
+#             profile_obj.save()
+#         return redirect('/login/')
+#
+#     except Exception as e:
+#         print(e)
+#
+#     return redirect('/')

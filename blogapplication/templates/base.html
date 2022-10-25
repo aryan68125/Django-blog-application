@@ -26,7 +26,6 @@
     <link rel="stylesheet" href="/static/css/custom.css">
     <script src="/static/js/main.js"> </script>
 
-
    </head>
   <body style="padding-top: 72px;">
     <input type="hidden" id="csrf" value="{{csrf_token}}">
@@ -48,12 +47,15 @@
                 <a class="btn btn-info" href="{% url 'add_blog' %}">Add Blogs</a>
               </li>
               <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block">
-                <a class="btn btn-danger" href="{% url 'logout_view' %}">Logout</a>
+                     <form action = "{% url 'logout' %}" method="post" style ="padding-left :5px;">
+                         {% csrf_token %}
+                         <input class="btn btn-danger" type = "submit" value="Sign out"/>
+                     </form>
               </li>
 
               {% else %}
               <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block">
-                <a class="btn btn-primary" href="{% url 'login_view' %}">Add Blog</a>
+                <a class="btn btn-primary" href="{% url 'login' %}">Add Blog</a>
               </li>
 
               {% endif %}

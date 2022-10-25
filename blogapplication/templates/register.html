@@ -1,16 +1,22 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block start %}
-
 <div class="container-fluid px-3">
     <div class="row min-vh-100">
       <div class="col-md-8 col-lg-6 col-xl-5 d-flex align-items-center">
         <div class="w-100 py-5 px-md-5 px-xl-6 position-relative">
-         
+
+          <form action="{% url 'register' %}" method="post">
+                    {% csrf_token %}
           <div class="form-validate">
             <div class="form-group">
+              <label class="form-label" for="loginUsername"> Username</label>
+              <input class="form-control" name="username" id="loginUsername" type="text" placeholder="Aditya Kumar" autocomplete="off" required data-msg="Please enter your user name">
+            </div>
+            <div class="form-group mb-4">
               <label class="form-label" for="loginUsername"> Email Address</label>
-              <input class="form-control" name="loginUsername" id="loginUsername" type="email" placeholder="name@address.com" autocomplete="off" required data-msg="Please enter your email">
+              <input class="form-control" name="email" id="EmailAddress" type="email" placeholder="name@address.com" autocomplete="off" required data-msg="Please enter your email">
+
             </div>
             <div class="form-group mb-4">
               <div class="row">
@@ -18,14 +24,30 @@
                   <label class="form-label" for="loginPassword"> Password</label>
                 </div>
               </div>
-              <input class="form-control" name="loginPassword" id="loginPassword" placeholder="Password" type="password" required data-msg="Please enter your password">
+              <input class="form-control" name="password" id="loginPassword" placeholder="Password" type="password" required data-msg="Please enter your password"/>
+              <small class="float-right py-3 showPasswordToggle" id="showPasswordToggle" style="margin-top:15px; margin-bottom:15px;">SHOW</small>
             </div>
-            
+            <div class="form-group mb-4">
+              <div class="row">
+                <div class="col">
+                  <label class="form-label" for="ConfirmPassword">Confirm Password</label>
+                </div>
+              </div>
+              <input class="form-control" name="ConfirmPassword" id="ConfirmPassword" placeholder="Retype Password" type="password" required data-msg="Please enter your password">
+            </div>
+
             <!-- Submit-->
-            <button class="btn btn-lg btn-block btn-primary" onclick="register()">Sign in</button>
-           
+            <button class="btn btn-lg btn-block btn-primary" id="submitBTN">Sign up</button>
+            <p class="text-center">
+                <small class="text-muted text-center">
+                    Already have an account ?
+                    <a href="{% url 'login' %}">Sign In</a>
+                </small>
+            </p>
+
           </div>
-          
+        </form>
+
         </div>
       </div>
       <div class="col-md-4 col-lg-6 col-xl-7 d-none d-md-block">
@@ -34,5 +56,8 @@
       </div>
     </div>
   </div>
+
+<!---Always declare java script here after your buttons and all of your elements have been declared--->
+<script src="/static/js/register.js"> </script>
 
   {% endblock %}
