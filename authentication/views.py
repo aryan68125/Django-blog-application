@@ -405,8 +405,8 @@ class SetNewPasswordView(View):
         }
 
         #check the password
-        password1 = request.POST.get('password_1')
-        password2 = request.POST.get('password_2')
+        password1 = request.POST.get('Password')
+        password2 = request.POST.get('ConfirmPassword')
         if len(password1) < 6:
             messages.add_message(request,messages.ERROR,'password must be atleast 6 characters long')
             context['has_error'] = True
