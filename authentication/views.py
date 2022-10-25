@@ -67,7 +67,7 @@ class RegistrationView(View):
     def dispatch(self, *args, **kwargs):
         if self.request.user.is_authenticated:
             return redirect('expenses')
-        return super().dispatch(*args, **kwargs)#########   error
+        return super().dispatch(*args, **kwargs)
 
     def get(self, request):
         return render(request, 'register.html')
@@ -140,7 +140,7 @@ class RegistrationView(View):
                    settings.EMAIL_HOST_USER,
                    [email],
                 )
-                email_message.send()######## error
+                email_message.send()
                 #now redirect user to the login page
                 return redirect('success')
 
