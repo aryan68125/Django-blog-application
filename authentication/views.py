@@ -67,7 +67,7 @@ class RegistrationView(View):
     def dispatch(self, *args, **kwargs):
         if self.request.user.is_authenticated:
             return redirect('expenses')
-        return super().dispatch(*args, **kwargs)
+        return super().dispatch(*args, **kwargs)#########   error
 
     def get(self, request):
         return render(request, 'register.html')
@@ -140,7 +140,7 @@ class RegistrationView(View):
                    settings.EMAIL_HOST_USER,
                    [email],
                 )
-                email_message.send()
+                email_message.send()######## error
                 #now redirect user to the login page
                 return redirect('success')
 
@@ -191,13 +191,13 @@ class ActivateAccountView(View):
             messages.success(request,'account activated successfully')
             return redirect('login')
         messages.error(request,'account activation Failed!')
-        return render(request,'authentication/error.html', status=401)
+        return render(request,'error.html', status=401)
 
 class SuccessView(View):
     #this dispatch function prevents logged in user from seeing reset-password page
     def dispatch(self, *args, **kwargs):
         if self.request.user.is_authenticated:
-            return redirect('expenses')
+            return redirect('home')
         return super().dispatch(*args, **kwargs)
 
     def get(self, request):
