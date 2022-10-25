@@ -116,7 +116,7 @@ class RegistrationView(View):
 
                 #step3. construct a message
                 # so inorder to do that you need to import :- from django.template.loader import render_to_string this library renders a template with a context automatically
-                #convert the user.pk into bytes so we need to import:- from django.utils.encoding import force_bytes, force_text, DjangoUnicodeDecodeError
+                #convert the user.pk into bytes so we need to import:- from django.utils.encoding import force_bytes, force_str, DjangoUnicodeDecodeError
                 #import a module that generated a unique token for our application when we need to verify the user's email address :- from django.contrib.auth.tokens import PasswordResetTokenGenerator it can be used to activate accounts and to reset password
                 create_a_context_for_front_end={
                     'user':user,
@@ -172,7 +172,7 @@ class ActivateAccountView(View):
         print(f"request = {request}")
         #in here we will check if the token is valid or not
         try:
-            uid = force_text(urlsafe_base64_decode(uidb64))
+            uid = force_str(urlsafe_base64_decode(uidb64))
             print(f"uid = {uid}")
             #do not use User.objects.filter(pk=uid).exists(): instead use User.objects.get(pk=uid) otherwise when you
             #deploy your application on heroku it will throuw an exception
@@ -343,7 +343,7 @@ class RequestResetEmailView(View):
 
             #step3. construct a message
             # so inorder to do that you need to import :- from django.template.loader import render_to_string this library renders a template with a context automatically
-            #convert the user.pk into bytes so we need to import:- from django.utils.encoding import force_bytes, force_text, DjangoUnicodeDecodeError
+            #convert the user.pk into bytes so we need to import:- from django.utils.encoding import force_bytes, force_str, DjangoUnicodeDecodeError
             #import a module that generated a unique token for our application when we need to verify the user's email address :- from django.contrib.auth.tokens import PasswordResetTokenGenerator it can be used to activate accounts and to reset password
             create_a_context_for_front_end={
                 'user':user,
@@ -383,7 +383,7 @@ class SetNewPasswordView(View):
 
         #prevent user from using the same token that was sent in the email of the user to reset the password
         try:
-            user_id = force_text(urlsafe_base64_decode(uidb64))
+            user_id = force_str(urlsafe_base64_decode(uidb64))
             user = User.objects.get(pk=user_id)
             if not PasswordResetTokenGenerator().check_token(user, token): #if this returns false then the link is already used to reset the password
                 messages.add_message(request,messages.ERROR,'Password reset link expired')
@@ -418,7 +418,7 @@ class SetNewPasswordView(View):
 
         #if the user entered the correct password then we are going to proceed with setting the new password for the user account
         try:
-            user_id = force_text(urlsafe_base64_decode(uidb64))
+            user_id = force_str(urlsafe_base64_decode(uidb64))
             user = User.objects.get(pk=user_id)
             user.set_password(password1)
             user.save()
