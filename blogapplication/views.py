@@ -86,7 +86,7 @@ def blog_update(request, slug):
         if blog_obj.user != request.user:
             return redirect('/')
 
-        initial_dict = {'content': blog_obj.content}
+        initial_dict = {'content': blog_obj.content, 'image' : blog_obj.image, 'title' : blog_obj.title}
         form = BlogForm(initial=initial_dict)
         if request.method == 'POST':
             form = BlogForm(request.POST)
@@ -98,7 +98,7 @@ def blog_update(request, slug):
             if form.is_valid():
                 content = form.cleaned_data['content']
 
-            blog_obj = BlogModel.objects.create(
+            blog_obj = BlogModel.objects.update(
                 user=user, title=title,
                 content=content, image=image
             )

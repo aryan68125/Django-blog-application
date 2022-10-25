@@ -66,7 +66,7 @@ class RegistrationView(View):
     #this dispatch function prevents logged in user from seeing registration page
     def dispatch(self, *args, **kwargs):
         if self.request.user.is_authenticated:
-            return redirect('expenses')
+            return redirect('home')
         return super().dispatch(*args, **kwargs)
 
     def get(self, request):
