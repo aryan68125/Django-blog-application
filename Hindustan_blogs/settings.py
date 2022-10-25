@@ -168,12 +168,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #this line of code will host our website on heroku
 django_heroku.settings(locals())
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_USE_TLS = True
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = 'email'
-# EMAIL_HOST_PASSWORD = 'password'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'userpiyush6@gmail.com'
+EMAIL_HOST_PASSWORD = 'wcnvtyexogcbscee'
 
 # #------AMAZON S3 BUCKET RELATED SETTINGS--------------------
 # #this will handle our amazon s3 bucket that will host our static files and user uploaded files on our website
