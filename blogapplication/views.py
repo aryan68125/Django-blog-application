@@ -86,22 +86,25 @@ def blog_update(request, slug):
         if blog_obj.user != request.user:
             return redirect('/')
 
-        initial_dict = {'content': blog_obj.content, 'image' : blog_obj.image, 'title' : blog_obj.title}
-        form = BlogForm(initial=initial_dict)
+        #initial_dict = {'content': blog_obj.content, 'title' : blog_obj.title}
+        form = BlogForm(instance=blog_obj)
         if request.method == 'POST':
-            form = BlogForm(request.POST)
-            print(request.FILES)
-            image = request.FILES['image']
-            title = request.POST.get('title')
+            form = BlogForm(request.POST, request.FILES, instance=blog_obj)
+            print(request.FILES['image'])
+            # image_dir = request.FILES['image']
+            # image = image_dir
+            blog_obj.title = request.POST.get('title')
+            blog_obj.image = request.FILES['image']
             user = request.user
 
             if form.is_valid():
-                content = form.cleaned_data['content']
+                # content = form.cleaned_data['content']
+                form.save()
 
-            blog_obj = BlogModel.objects.update(
-                user=user, title=title,
-                content=content, image=image
-            )
+            # blog_obj = BlogModel.objects.update(
+            #     user=user, title=title,
+            #     content=content, image=image
+            # )
 
         context['blog_obj'] = blog_obj
         context['form'] = form

@@ -94,13 +94,25 @@ WSGI_APPLICATION = 'Hindustan_blogs.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+#connect your django project to a local production postgresSQL database server
+#this postgreSQL can be managed by pgadmin4
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd9rrsg1lav76ag',
+        'USER': 'uojfokeqyalyai',
+        'PASSWORD': 'c42f246b79e7d6f825e35b73d7e2529873d25303d46ff835b70d184be565320d',
+        'HOST': 'ec2-44-206-11-200.compute-1.amazonaws.com',
+        'PORT': 5432,
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -159,6 +171,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 #by default the images uploaded by the user will be stored in the root directory of the project
 #but we want django to store our images uploaded by the users into this path (static/images/)
 #MEDIA_ROOT simply tells django where to store user uploaded content
+'''MEDIA ROOT we are gonna change this so it doesn't get uploaded to the image folder inside the static folder of our django project
+Instead we want to upload the images uploaded by the users to the AWS server to be more precise we want to upload the images uploaded by the user to the AWS s3 bucket.'''
 MEDIA_ROOT = os.path.join(BASE_DIR,'static/images') #-> current path of all the images that are being sent inyto this directory
 
 # Default primary key field type
@@ -175,21 +189,24 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'userpiyush6@gmail.com'
 EMAIL_HOST_PASSWORD = 'wcnvtyexogcbscee'
 
-# #------AMAZON S3 BUCKET RELATED SETTINGS--------------------
-# #this will handle our amazon s3 bucket that will host our static files and user uploaded files on our website
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# #setup your access key of your AWS (Amazon web services)
-# AWS_ACCESS_KEY_ID = 'AKIAXJD4CDE464QQSZ6L'
-# AWS_SECRET_ACCESS_KEY = 'eWvePxmLSkLj84oUqx/os7Zx6hKvep0wRdJjIzaM'
-#
-# #now assign your s3 bucket to this django project
-# AWS_STORAGE_BUCKET_NAME = "blog-application-aryan68125"
-#
-# #add this so that you can access your uploaded images from amazon s3 bucket
-# AWS_S3_REGION_NAME = "ap-south-1"
-#
-# AWS_S3_SIGNATURE_VERSION = "s3v4"
-#
-# #this will make sure that the images having same name when uploaded to the s3 bucket have a unique name and do not overwrite each other
-# #so basically if there are two users uploading an image having same names then it will not cause any conflict and prevent one user from overwriting othe user's uploaded image in the S3 bucket
-# AWS_S3_FILE_OVERWRITE = False
+
+
+
+#------AMAZON S3 BUCKET RELATED SETTINGS--------------------
+#this will handle our amazon s3 bucket that will host our static files and user uploaded files on our website
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage' #-> To upload your media files to amazon s3 bucket
+#setup your access key of your AWS (Amazon web services)
+AWS_ACCESS_KEY_ID = 'AKIAXJD4CDE4XBKQL57D'
+AWS_SECRET_ACCESS_KEY = 'd8m7xqWOdQSpejiESNpIi3UkoeYeGnr5EsGcVubh'
+
+#now assign your s3 bucket to this django project
+AWS_STORAGE_BUCKET_NAME = "hindustan-blogs-268859"
+
+#add this so that you can access your uploaded images from amazon s3 bucket
+AWS_S3_REGION_NAME = "ap-south-1"
+
+AWS_S3_SIGNATURE_VERSION = "s3v4"
+
+#this will make sure that the images having same name when uploaded to the s3 bucket have a unique name and do not overwrite each other
+#so basically if there are two users uploading an image having same names then it will not cause any conflict and prevent one user from overwriting othe user's uploaded image in the S3 bucket
+AWS_S3_FILE_OVERWRITE = False

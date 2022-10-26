@@ -27,11 +27,34 @@
 
         </div>
 
-        <button type="submit" class="btn btn-primary mt-4">Create Blog</button>
+        <button type="submit" class="btn btn-primary mt-4">Update Blog</button>
 
     </form>
 
 </div>
 
-
 {% endblock %}
+<script>
+  $(function() {
+    $('.selector')
+      .editable({
+        // Set image delete URL.
+        imageDeleteURL: '/delete_image.php'
+      })
+
+      // Catch image remove
+      .on('editable.afterRemoveImage', function (e, editor, $img) {
+        // Set the image source to the image delete params.
+        editor.options.imageDeleteParams = {src: $img.attr('uploads/froala_editor/images/')};
+
+        // Make the delete request.
+        editor.deleteImage($img);
+      })
+
+      // Catch image delete successful.
+      .on('editable.imageDeleteSuccess', function (e, editor, data) { ... })
+
+      // Catch image delete error.
+      .on('editable.imageDeleteError', function (e, editor, error) { ... });
+  });
+</script>

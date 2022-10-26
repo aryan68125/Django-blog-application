@@ -23,10 +23,20 @@ class BlogModel(models.Model):
     slug = models.SlugField(max_length=1000, null=True, blank=True)
     user = models.ForeignKey(User, blank=True, null=True,
                              on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='blog')#-> use AWS
+    image = models.ImageField(null=True, blank=True, upload_to='blog')#-> use AWS
     created_at = models.DateTimeField(auto_now_add=True)
     upload_to = models.DateTimeField(auto_now=True)
 
+    #this will handle the situation when the user deletes the featured_image from their profile
+    '''This lines of code is extremely important to extract the uploaded images by the users from the AWS S3 buckets'''
+    @property
+    def imageURL(self):
+        try:
+            url = self.image.url #image url
+        except:
+            pass
+        return url
+    '''--------------------------------------------------------------------------------------------------------------------'''
 
     def __str__(self):
         return self.title
