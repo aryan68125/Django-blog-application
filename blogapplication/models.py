@@ -20,7 +20,7 @@ class Profile(models.Model):
 class BlogModel(models.Model):
     title = models.CharField(max_length=1000)
     content = FroalaField()
-    slug = models.SlugField(max_length=1000, null=True, blank=True)
+    slug = models.SlugField(max_length=1000)
     user = models.ForeignKey(User, blank=True, null=True,
                              on_delete=models.CASCADE)
     image = models.ImageField(null=True, blank=True, upload_to='blog')#-> use AWS

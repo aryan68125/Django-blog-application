@@ -5,7 +5,7 @@
 
 <section class="mt-5 pt-5">
     <div class="container">
-       
+
         <table class="table">
         <thead>
           <tr>
@@ -22,18 +22,20 @@
             <td>{{blog.title}}</td>
             <td>{{blog.created_at}}</td>
             <td>
+              {% if  blog.slug %}
                 <a href="{%  url 'blog_update' blog.slug %}" class="btn btn-success">Update</a>
+              {% endif %}
                 <a href="{% url 'blog_delete' blog.id %}" class="btn btn-danger">Delete</a>
 
 
             </td>
           </tr>
           {% endfor %}
-         
+
 
           </tbody>
           </table>
-          
+
     </div>
 </section>
 
