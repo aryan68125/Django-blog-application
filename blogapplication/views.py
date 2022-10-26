@@ -61,16 +61,17 @@ def add_blog(request):
             title = request.POST.get('title')
             user = request.user
 
-            if form.is_valid():
-                print('Valid')
-                content = form.cleaned_data['content']
+            if title:
+                if form.is_valid():
+                    print('Valid')
+                    content = form.cleaned_data['content']
 
-            blog_obj = BlogModel.objects.create(
-                user=user, title=title,
-                content=content, image=image
-            )
-            print(blog_obj)
-            return redirect('/add-blog/')
+                blog_obj = BlogModel.objects.create(
+                    user=user, title=title,
+                    content=content, image=image
+                )
+                print(blog_obj)
+                return redirect('/add-blog/')
     except Exception as e:
         print(e)
 
