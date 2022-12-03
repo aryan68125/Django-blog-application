@@ -8,6 +8,7 @@ here are some sample images :-
 ![](preview_images/5.png)
 ![](preview_images/6.png)
 ![](preview_images/7.png)
+![](preview_images/8.png)
 
 # Important NOTE :
 ### Don't forget to add this line in your AWS s3 bucket policy rules so that each and every object that is created inside this bucket has public access.
