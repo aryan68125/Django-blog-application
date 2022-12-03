@@ -1,14 +1,14 @@
 This is a Django blog application repo that holds Hindustan blogs website source code. Here in this website young fledgling bloggers can come and signup to this website and share their blogs on different topics to the rest of the world
 
 here are some sample images :-
-<img src="preview_images/2.png" width="800" /> ![](preview_images/2.png)
-![some name](preview_images/2.png)
-![some name](preview_images/3.png)
-![some name](preview_images/4.png)
-![some name](preview_images/5.png)
-![some name](preview_images/6.png)
-![some name](preview_images/7.png)
-![some name](preview_images/8.png)
+![](preview_images/1.png)
+![](preview_images/2.png)
+![](preview_images/3.png)
+![](preview_images/4.png)
+![](preview_images/5.png)
+![](preview_images/6.png)
+![](preview_images/7.png)
+![](preview_images/8.png)
 
 # Important NOTE :
 ### Don't forget to add this line in your AWS s3 bucket policy rules so that each and every object that is created inside this bucket has public access.
